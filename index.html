@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apex Roofing Co. — Precision Overhead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FAFAF8;
+    --off-white: #F2F0EB;
+    --stone: #E8E4DC;
+    --warm-gray: #9A9591;
+    --charcoal: #2C2B28;
+    --dark: #1A1917;
+    --gold: #B8975A;
+    --gold-light: #D4AF72;
+    --accent: #8B7355;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    cursor: auto;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    mix-blend-mode: multiply;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    opacity: 0.6;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: calc(100% - 48px);
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    border-radius: 100px;
+    background: rgba(250,250,248,0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(250,250,248,0.92);
+    border: 1px solid rgba(184,151,90,0.15);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+  nav.scrolled .nav-logo { color: var(--charcoal); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+  nav.scrolled .nav-links a { color: var(--warm-gray); }
+  .nav-links a:hover { color: var(--gold) !important; }
+  .nav-cta {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-radius: 100px;
+    background: var(--gold);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: scale(1.03); }
+
+  /* ─── HERO ─── */
+  .hero {
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1601628828688-632f38a5a7d0?w=1800&q=80') center/cover no-repeat;
+    transform: scale(1.05);
+    animation: heroZoom 12s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,25,23,0.88) 0%, rgba(26,25,23,0.3) 50%, rgba(26,25,23,0.1) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .hero-eyebrow span {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 8vw, 8.5rem);
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-title .line1 {
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+  .hero-title .line2 {
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.7s forwards;
+  }
+  .hero-sub {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.55);
+    max-width: 360px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.9s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 1.1s forwards;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: var(--gold);
+    color: var(--white);
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(184,151,90,0.35);
+  }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+  .btn-ghost:hover { color: var(--gold); }
+  .btn-ghost svg { transition: transform 0.3s; }
+  .btn-ghost:hover svg { transform: translateX(4px); }
+
+  .hero-stats {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    opacity: 0;
+    animation: fadeLeft 0.9s ease 1.3s forwards;
+  }
+  .stat-item { text-align: right; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ─── TICKER ─── */
+  .ticker-wrap {
+    background: var(--gold);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+  .ticker {
+    display: inline-flex;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    font-weight: 500;
+    padding-right: 60px;
+  }
+  .ticker-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SERVICES ─── */
+  .services {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 60px;
+  }
+  .section-label span {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    font-weight: 500;
+  }
+  .label-line {
+    flex: 1;
+    height: 1px;
+    background: var(--stone);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--stone);
+    border: 1px solid var(--stone);
+  }
+  .service-card {
+    background: var(--white);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s ease;
+    cursor: pointer;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: var(--off-white); }
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--stone);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.4s;
+  }
+  .service-card:hover .service-num { color: var(--gold-light); }
+  .service-icon {
+    width: 44px; height: 44px;
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .service-desc {
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+    transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 14px; }
+
+  /* ─── WHY US ─── */
+  .why-us {
+    background: var(--dark);
+    padding: 120px 60px;
+    overflow: hidden;
+    position: relative;
+  }
+  .why-us::before {
+    content: 'APEX';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28vw;
+    color: rgba(255,255,255,0.02);
+    right: -4vw;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+  .why-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .why-left .section-label span { color: rgba(255,255,255,0.3); }
+  .why-left .label-line { background: rgba(255,255,255,0.08); }
+  .why-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .why-title em { font-style: italic; color: var(--gold); }
+  .why-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 400px;
+  }
+  .why-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    border: 1px solid rgba(184,151,90,0.4);
+    border-radius: 100px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .why-cta:hover { background: rgba(184,151,90,0.1); border-color: var(--gold); }
+
+  .why-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.06);
+  }
+  .why-stat {
+    background: var(--dark);
+    padding: 40px 32px;
+    position: relative;
+  }
+  .why-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.8rem;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+  .why-stat-num em { color: var(--gold); font-style: normal; }
+  .why-stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.5;
+  }
+  .why-feat {
+    grid-column: 1 / -1;
+    background: var(--dark);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .feat-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .feat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .feat-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(184,151,90,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .feat-text {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+  .feat-text strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* ─── GALLERY ─── */
+  .gallery {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 6px;
+    margin-top: 60px;
+  }
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-item:first-child { grid-row: 1 / 3; }
+  .gallery-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: brightness(0.92) saturate(0.85);
+  }
+  .gallery-item:hover .gallery-img {
+    transform: scale(1.06);
+    filter: brightness(1) saturate(1);
+  }
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,25,23,0.6) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials {
+    background: var(--off-white);
+    padding: 120px 60px;
+  }
+  .test-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .test-card {
+    background: var(--white);
+    padding: 44px 36px;
+    position: relative;
+    border: 1px solid var(--stone);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .test-card:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.07);
+    transform: translateY(-4px);
+  }
+  .test-quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    line-height: 0.7;
+    color: var(--stone);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .test-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--charcoal);
+    line-height: 1.65;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .test-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 24px;
+    border-top: 1px solid var(--stone);
+  }
+  .test-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--stone);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .test-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .test-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    letter-spacing: 0.02em;
+  }
+  .test-role {
+    font-size: 0.72rem;
+    color: var(--warm-gray);
+    margin-top: 2px;
+  }
+  .test-stars {
+    margin-left: auto;
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+  }
+
+  /* ─── FAQ ─── */
+  .faq {
+    padding: 120px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .faq-list { margin-top: 60px; }
+  .faq-item {
+    border-bottom: 1px solid var(--stone);
+  }
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0;
+    cursor: pointer;
+    gap: 20px;
+  }
+  .faq-q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.3;
+  }
+  .faq-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--stone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--warm-gray);
+    font-size: 1rem;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+  }
+  .faq-item.open .faq-icon {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 24px; }
+  .faq-a p {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    background: var(--charcoal);
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(184,151,90,0.12) 0%, transparent 70%);
+  }
+  .cta-band-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cta-band-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .cta-band-title em { font-style: italic; color: var(--gold); }
+  .cta-band-sub {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 44px;
+    font-weight: 300;
+    position: relative;
+  }
+  .cta-band-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 60px 60px 36px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 36px;
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .footer-brand-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 220px;
+  }
+  .footer-col-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 300;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.2);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+  .footer-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 3px rgba(74,222,128,0.2);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.2); }
+    50% { box-shadow: 0 0 0 6px rgba(74,222,128,0.05); }
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-anim {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-anim.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { width: calc(100% - 24px); top: 12px; padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 24px 60px; }
+    .hero-stats { right: 24px; bottom: 60px; }
+    .services, .gallery, .faq { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-us { padding: 80px 24px; }
+    .why-inner { grid-template-columns: 1fr; gap: 60px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item:first-child { grid-row: auto; grid-column: 1 / -1; height: 260px; }
+    .gallery-item { height: 180px; }
+    .test-grid { grid-template-columns: 1fr; }
+    .testimonials { padding: 80px 24px; }
+    .cta-band { padding: 80px 24px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    footer { padding: 48px 24px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Apex Roofing Co.</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why-us">Why Us</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Free Estimate</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span>Premium Roofing Since 2003</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line1">Roofs Built</span>
+      <span class="line2">to <em>Endure.</em></span>
+    </h1>
+    <p class="hero-sub">Precision craftsmanship. Premium materials. Guaranteed work that protects your most valuable asset — for decades.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Get a Free Estimate
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#gallery" class="btn-ghost">
+        View Our Work
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">20<span>+</span></div>
+      <div class="stat-label">Years of Service</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3<span>K</span></div>
+      <div class="stat-label">Roofs Installed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">99<span>%</span></div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><span>Residential Roofing</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Commercial Projects</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Emergency Repairs</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Roof Inspections</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Storm Damage</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Gutter Systems</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Skylights & Flashing</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Residential Roofing</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Commercial Projects</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Emergency Repairs</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Roof Inspections</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Storm Damage</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Gutter Systems</span><span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span>Skylights & Flashing</span><span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">
+    <span>What We Do</span>
+    <div class="label-line"></div>
+  </div>
+  <h2 class="section-title reveal">Expert Services,<br><em>Flawless Execution.</em></h2>
+  <div style="height:48px"></div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 36L22 12l14 24H8z"/><path d="M15 36v-8h14v8"/>
+      </svg>
+      <h3 class="service-name">Residential Roofing</h3>
+      <p class="service-desc">Full roof installations, replacements, and repairs for homes of all sizes. From asphalt shingles to designer slate — done right the first time.</p>
+      <a href="#contact" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="16" width="36" height="22" rx="1"/><path d="M4 16L22 6l18 10"/><path d="M16 38V28h12v10"/>
+      </svg>
+      <h3 class="service-name">Commercial Roofing</h3>
+      <p class="service-desc">Flat, low-slope, and pitched commercial systems. TPO, EPDM, and metal roofing solutions engineered for performance and longevity.</p>
+      <a href="#contact" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 6L6 20v20h32V20L22 6z"/><path d="M6 20h32M14 28h16"/>
+      </svg>
+      <h3 class="service-name">Storm & Emergency</h3>
+      <p class="service-desc">24/7 emergency response for wind, hail, and storm damage. We tarp, repair, and restore — fast. Insurance claim assistance included.</p>
+      <a href="#contact" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="22" cy="22" r="14"/><path d="M22 14v8l6 4"/>
+      </svg>
+      <h3 class="service-name">Roof Inspections</h3>
+      <p class="service-desc">Comprehensive drone-assisted and manual inspections. Detailed reports with photographic documentation for homeowners and real estate transactions.</p>
+      <a href="#contact" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">05</div>
+      <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 32l8-8 6 6 10-12 8 6"/><rect x="4" y="4" width="36" height="36" rx="2"/>
+      </svg>
+      <h3 class="service-name">Gutter Systems</h3>
+      <p class="service-desc">Seamless gutter installation, guards, and cleaning. Keep water flowing away from your foundation with systems designed to last.</p>
+      <a href="#contact" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">06</div>
+      <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="10" y="10" width="24" height="24" rx="2"/><path d="M10 22h24M22 10v24"/>
+      </svg>
+      <h3 class="service-name">Skylights & Flashing</h3>
+      <p class="service-desc">Skylight installation and flashing repair done with precision. We eliminate leaks at the most vulnerable points of any roofing system.</p>
+      <a href="#contact" class="service-link">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="why-us">
+  <div class="why-inner">
+    <div class="why-left">
+      <div class="section-label">
+        <span>Why Apex</span>
+        <div class="label-line"></div>
+      </div>
+      <h2 class="why-title reveal">The Standard<br>Others <em>Measure<br>Against.</em></h2>
+      <p class="why-desc reveal">We don't cut corners. Every project gets the same obsessive attention — whether it's a repair or a full commercial installation. Your home deserves no less.</p>
+      <a href="#contact" class="why-cta reveal">Schedule a Consultation →</a>
+    </div>
+    <div class="why-right reveal">
+      <div class="why-stat">
+        <div class="why-stat-num">20<em>+</em></div>
+        <div class="why-stat-label">Years of<br>Experience</div>
+      </div>
+      <div class="why-stat">
+        <div class="why-stat-num">3<em>K</em></div>
+        <div class="why-stat-label">Roofs<br>Completed</div>
+      </div>
+      <div class="why-stat">
+        <div class="why-stat-num">A<em>+</em></div>
+        <div class="why-stat-label">BBB<br>Rating</div>
+      </div>
+      <div class="why-stat">
+        <div class="why-stat-num">50<em>+</em></div>
+        <div class="why-stat-label">5-Star<br>Reviews</div>
+      </div>
+      <div class="why-feat">
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8l4 4 8-8"/></svg>
+          </div>
+          <div class="feat-text">
+            <strong>Licensed, Bonded & Insured</strong>
+            Full coverage on every project — zero liability for homeowners.
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8l4 4 8-8"/></svg>
+          </div>
+          <div class="feat-text">
+            <strong>25-Year Workmanship Warranty</strong>
+            We stand behind our work long after the crew packs up.
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8l4 4 8-8"/></svg>
+          </div>
+          <div class="feat-text">
+            <strong>Insurance Claim Specialists</strong>
+            We handle the paperwork so you don't have to deal with the headache.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-label">
+    <span>Our Work</span>
+    <div class="label-line"></div>
+  </div>
+  <h2 class="section-title reveal">Results That<br><em>Speak for Themselves.</em></h2>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?w=900&q=80" alt="Premium residential roof install" />
+      <div class="gallery-overlay"><span class="gallery-tag">Residential Install</span></div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1591588582259-e675a3a3c0b7?w=600&q=80" alt="Shingle roofing" />
+      <div class="gallery-overlay"><span class="gallery-tag">Shingle Roofing</span></div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Roofers at work" />
+      <div class="gallery-overlay"><span class="gallery-tag">Expert Crew</span></div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=600&q=80" alt="Modern home roof" />
+      <div class="gallery-overlay"><span class="gallery-tag">Modern Home</span></div>
+    </div>
+    <div class="gallery-item">
+      <img class="gallery-img" src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&q=80" alt="Beautiful home exterior" />
+      <div class="gallery-overlay"><span class="gallery-tag">Luxury Residential</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="test-inner">
+    <div class="section-label">
+      <span>Client Stories</span>
+      <div class="label-line"></div>
+    </div>
+    <h2 class="section-title reveal">What Homeowners<br><em>Are Saying.</em></h2>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-quote-mark">"</div>
+        <p class="test-text">Apex replaced our entire roof in just two days. The crew was professional, clean, and the result is absolutely beautiful. Couldn't be happier.</p>
+        <div class="test-author">
+          <div class="test-avatar"><img src="https://i.pravatar.cc/80?img=47" alt="Sarah M." /></div>
+          <div>
+            <div class="test-name">Sarah M.</div>
+            <div class="test-role">Homeowner — Denver, CO</div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="test-card reveal reveal-delay-1">
+        <div class="test-quote-mark">"</div>
+        <p class="test-text">After the hailstorm, Apex had tarps on our roof within hours. They handled our insurance claim from start to finish. True professionals.</p>
+        <div class="test-author">
+          <div class="test-avatar"><img src="https://i.pravatar.cc/80?img=32" alt="James K." /></div>
+          <div>
+            <div class="test-name">James K.</div>
+            <div class="test-role">Property Manager — Austin, TX</div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="test-card reveal reveal-delay-2">
+        <div class="test-quote-mark">"</div>
+        <p class="test-text">I got four quotes and Apex wasn't the cheapest — but their attention to detail and warranty sold me. Best decision I've made for this house.</p>
+        <div class="test-author">
+          <div class="test-avatar"><img src="https://i.pravatar.cc/80?img=5" alt="Linda R." /></div>
+          <div>
+            <div class="test-name">Linda R.</div>
+            <div class="test-role">Homeowner — Phoenix, AZ</div>
+          </div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-label">
+    <span>Common Questions</span>
+    <div class="label-line"></div>
+  </div>
+  <h2 class="section-title reveal">Everything You<br><em>Need to Know.</em></h2>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="faq-q-text">How long does a full roof replacement take?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>Most residential roof replacements are completed in 1–3 days depending on the size and complexity of the roof. We'll give you a precise timeline during your free estimate consultation.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="faq-q-text">Do you work with insurance companies?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>Yes. We are experienced insurance claim specialists. We'll document the damage, work directly with your adjuster, and handle the entire claim process so you get what you're owed with zero stress.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="faq-q-text">What roofing materials do you install?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>We install all major roofing materials: architectural asphalt shingles, designer shingles, metal roofing (standing seam and exposed fastener), slate, tile, TPO, and EPDM for commercial applications.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="faq-q-text">What does your warranty cover?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>We offer a 25-year workmanship warranty on all installations. This covers labor and installation defects. Materials also come with manufacturer warranties (typically 30–50 years) which we help you register.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="faq-q-text">Is the estimate really free?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>100% free, no obligation. One of our certified roofing specialists will inspect your roof, document any issues, and provide a detailed written estimate — at zero cost to you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" id="contact">
+  <p class="cta-band-eyebrow">Ready to Get Started?</p>
+  <h2 class="cta-band-title">Your Roof Deserves<br>the <em>Apex Standard.</em></h2>
+  <p class="cta-band-sub">Free estimate. No pressure. Just honest expertise from a team that's been doing this for over 20 years.</p>
+  <div class="cta-band-actions">
+    <a href="tel:+15555550123" class="btn-primary" style="background:var(--gold)">
+      Call (555) 555-0123
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 9.33a8.4 8.4 0 01-2.63-.42.7.7 0 00-.72.17l-1.62 1.62a10.5 10.5 0 01-4.62-4.62l1.62-1.62a.7.7 0 00.17-.72A8.4 8.4 0 012.17 1.17.7.7 0 001.5.5H.7A.7.7 0 000 1.2 10.5 10.5 0 0012.8 14a.7.7 0 00.7-.7v-.8a.7.7 0 00-.67-.7z" fill="currentColor"/></svg>
+    </a>
+    <a href="/cdn-cgi/l/email-protection#aec6cbc2c2c1eecfdecbd6dcc1c1c8c7c0c980cdc1c3" class="btn-primary" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7)">
+      Email Us
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 3h12v8H1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M1 3l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">Apex Roofing Co.</div>
+      <p class="footer-brand-desc">Premium residential and commercial roofing services. Licensed, bonded, and trusted by homeowners across the region since 2003.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Residential Roofing</a></li>
+        <li><a href="#">Commercial Roofing</a></li>
+        <li><a href="#">Emergency Repairs</a></li>
+        <li><a href="#">Gutter Systems</a></li>
+        <li><a href="#">Skylights</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Process</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+15555550123">(555) 555-0123</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#127a777e7e7d527362776a607d7d747b7c753c717d7f"><span class="__cf_email__" data-cfemail="026a676e6e6d426372677a706d6d646b6c652c616d6f">[email&#160;protected]</span></a></li>
+        <li><a href="#">Denver, Colorado</a></li>
+        <li><a href="#contact">Free Estimate</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Apex Roofing Co. All rights reserved.</span>
+    <div class="footer-badge">
+      <div class="badge-dot"></div>
+      System Operational
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .service-card, .faq-q, .gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '18px'; cursor.style.height = '18px';
+      ring.style.width = '52px'; ring.style.height = '52px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '10px'; cursor.style.height = '10px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+
+  // Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal — add reveal-anim class via JS so fallback is always visible
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    reveals.forEach(el => el.classList.add('reveal-anim'));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    // Immediately reveal anything already in view
+    setTimeout(() => {
+      reveals.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) el.classList.add('visible');
+      });
+    }, 100);
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventList
